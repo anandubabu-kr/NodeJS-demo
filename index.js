@@ -1,30 +1,27 @@
-const path = require('path')
-const purl= require('./urlmodule');
-const fs = require('fs')
+// run `node index.js` in the terminal
 
+const fs = require('fs');
 
-console.log("Node JS is a javaScript run time")
+console.log(`Node.js v${process.versions.node}!`);
 
+function mercury(msg, msgfun) {
+  msgfun(`Hello ${msg}, welcome to mercury `);
+}
 
-// Basics of path module 
-const myPath = path.basename(__dirname)
-console.log("My basic Path is ", myPath)
-
-// Basics using url module
-console.log("Hostename : ",purl.hostname)
-
-
-// Basics using fs module
-
-fs.writeFile("fsfile.txt",`This is a string destructure\n base name :  ${myPath}`,(err)=>{
-    if(err) throw err;
-    console.log("Write Completed")
+mercury('Astro', (replay) => {
+  console.log(`$REPLAY : ${replay}`);
 });
-fs.readFile('./fsfile.txt','utf8',(err,data)=>{
-    if(err) throw err
-    console.log(data)
-})
 
+const http = require('http');
 
+const hostname = '127.0.0.1';
+const port = 3000;
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-type', 'text/html');
+  res.end('<h1>Hello friends</h1>');
+});
 
-
+server.listen(port, hostname, () => {
+  console.log(`Server up and running at http://${hostname}:${port}`);
+});
